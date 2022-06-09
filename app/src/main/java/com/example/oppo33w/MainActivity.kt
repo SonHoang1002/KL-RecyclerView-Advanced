@@ -14,7 +14,7 @@ import androidx.recyclerview.widget.RecyclerView
 
 class MainActivity : AppCompatActivity() {
     private lateinit var recycler: RecyclerView
-    private lateinit var btn1 : Button
+    private lateinit var btn1: Button
 
     // Keeps track of which LayoutManager is in use for the [RecyclerView]
     private var isLinearLayoutManager = true
@@ -26,15 +26,13 @@ class MainActivity : AppCompatActivity() {
         btn1 = findViewById(R.id.btn1)
 
 
-
         val ga = GAdapter(this, getList())
         recycler.adapter = ga
         setLayout()
 
         btn1.setOnClickListener {
-            var intent : Intent = Intent(this, MainActivity2::class.java)
-            intent.putStringArrayListExtra("list", ArrayList(getList()))
-            intent.putExtra("key",findViewById<TextView>(R.id.message).text.toString())
+            val intent = Intent(this, MainActivity2::class.java)
+            intent.putExtra("key", findViewById<TextView>(R.id.message).text.toString())
             startActivity(intent)
         }
     }
@@ -45,14 +43,14 @@ class MainActivity : AppCompatActivity() {
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        when (item.itemId){
+        when (item.itemId) {
             R.id.layout -> isLinearLayoutManager = !isLinearLayoutManager
         }
         setLayout()
-        item.icon = if(isLinearLayoutManager){
-            ContextCompat.getDrawable(this,R.drawable.ic_linear_layout)
-        }else{
-            ContextCompat.getDrawable(this,R.drawable.ic_grid_layout)
+        item.icon = if (isLinearLayoutManager) {
+            ContextCompat.getDrawable(this, R.drawable.ic_linear_layout)
+        } else {
+            ContextCompat.getDrawable(this, R.drawable.ic_grid_layout)
         }
         return super.onOptionsItemSelected(item)
     }
@@ -64,18 +62,12 @@ class MainActivity : AppCompatActivity() {
             recycler.layoutManager = GridLayoutManager(this, 4)
         }
     }
+
     private fun getList(): List<String> {
         val list = mutableListOf<String>()
         for (i in 'A'..'x') {
             list.add("$i")
         }
-//        list.add("?")
-//        list.add(":")
-//        list.add("@")
-//        list.add("!")
-//        list.add("#")
-//        list.add("$")
-
         return list.toList()
     }
 }

@@ -5,7 +5,6 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
-import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -31,8 +30,8 @@ class MainActivity2 : AppCompatActivity() {
     private fun getData(): List<String> {
         val intent: Intent = intent
         val key = intent.getStringExtra("key").toString()
-        list = intent.getStringArrayListExtra("list")!!.toList()
-        return list.filter { it.contains(key) }.sorted()
+        list = resources.getStringArray(R.array.words).toList()
+        return list.filter { it.startsWith(key,ignoreCase = true) }.sorted()
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
